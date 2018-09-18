@@ -1,5 +1,5 @@
 # AspAngularTemplate
-__ The template is provided without any design addons!
+### The template is provided without any design addons!
 
 ## The application consists of:
 *   RESTful API Backend using ASP.NET Core 2.1 Web API.
