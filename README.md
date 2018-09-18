@@ -1,7 +1,6 @@
 # AspAngularTemplate
 
-### The template is provided without any design addons!
-### The poject emphasis mainly on showing the connection between Web APIs and Angular using Jwt authorization!
+### The template is provided without any design addons and emphasis mainly on showing the connection between Web APIs and Angular using Jwt authorization!
 
 ## The application consists of:
 *   RESTful API Backend using ASP.NET Core 2.1 Web API.
