@@ -1,0 +1,27 @@
+﻿<h2>Create item page</h2>
+<form #createItemFrom="ngForm" (submit)="create()">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text"
+               id="title"
+               name="title"
+               #make="ngModel"
+               [(ngModel)]="item.title"
+               required />
+    </div>
+
+    <div>
+        <label for="quantity">Quantity:</label>
+        <input type="number"
+               id="quantity"
+               name="quantity"
+               #model="ngModel"
+               [(ngModel)]="item.quantity"
+               required />
+    </div>
+
+    <button type="submit"
+            [disabled]="!createItemFrom.form.valid">
+        Submit
+    </button>
+</form>

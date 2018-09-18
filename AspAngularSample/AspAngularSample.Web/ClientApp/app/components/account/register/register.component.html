@@ -1,0 +1,47 @@
+﻿<h3>Register</h3>
+<form #registerForm="ngForm" (submit)="register()">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text"
+               id="username"
+               name="username"
+               #name="ngModel"
+               [(ngModel)]="user.username"
+               required />
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="text"
+               id="email"
+               name="email"
+               #email="ngModel"
+               [(ngModel)]="user.email"
+               required />
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password"
+               id="password"
+               name="password"
+               #password="ngModel"
+               [(ngModel)]="user.password"
+               required />
+    </div>
+
+    <div>
+        <label for="passwordConfirmation">Confirm Password:</label>
+        <input type="password"
+               id="passwordConfirmation"
+               name="passwordConfirmation"
+               #passwordConfirmation="ngModel"
+               [(ngModel)]="user.passwordConfirmation"
+               required />
+    </div>
+
+    <button type="submit"
+            [disabled]="!registerForm.form.valid">
+        Submit
+    </button>
+</form>

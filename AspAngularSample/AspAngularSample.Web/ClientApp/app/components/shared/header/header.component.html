@@ -1,0 +1,34 @@
+﻿<nav>
+    <a routerLink="/">Home</a>
+    <div>
+        <ul>
+            <!-- Anonymous -->
+            <li>
+                <a routerLink="/items/all">Items</a>
+            </li>
+            <li *ngIf="isUserAuth() && isUserAdm()">
+                <a routerLink="/items/create">Create Item</a>
+            </li>
+            <!-- Authenticated -->
+            <!-- Current User -->
+            <li *ngIf="isUserAuth()">
+                <p>Hello, {{authService.getUser()}}</p>
+            </li>
+        </ul>
+        <ul>
+            <!-- Anonymous -->
+            <!-- Login -->
+            <li *ngIf="!isUserAuth()">
+                <a routerLink="/account/login">Login</a>
+            </li>
+            <!-- Register -->
+            <li *ngIf="!isUserAuth()">
+                <a routerLink="/account/register">Register</a>
+            </li>
+            <!-- Logout -->
+            <li *ngIf="isUserAuth()">
+                <a href="" (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

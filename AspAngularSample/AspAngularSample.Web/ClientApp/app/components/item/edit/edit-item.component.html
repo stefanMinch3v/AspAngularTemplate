@@ -1,0 +1,30 @@
+﻿
+<h1>Edit item</h1>
+<div>
+    <form (ngSubmit)="edit()" #itemForm="ngForm">
+        <div>
+            <label for="title">Title</label>
+            <input type="text"
+                    id="title"
+                    name="title"
+                    [(ngModel)]="item.title"
+                    required
+                    #title="ngModel"
+                    value="{{item.title}}" />
+            <div [hidden]="title.valid || title.pristine">
+                Invalid title!
+            </div>
+        </div>
+
+        <div>
+            <label for="quantity">Quantity</label>
+            <input type="number"
+                    id="quantity"
+                    name="quantity"
+                    [(ngModel)]="item.quantity"
+                    required
+                    value="item.quantity" />
+        </div>
+        <button type="submit" [disabled]="!itemForm.form.valid">Edit</button>
+    </form>
+</div>

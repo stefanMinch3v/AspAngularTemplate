@@ -1,0 +1,9 @@
+﻿<h3>Item details page</h3>
+<div *ngIf="item">
+    <p>Title: {{item.title}}</p>
+    <p>Description: {{item.quantity}}</p>
+    <div *ngIf="isUserAdm()">
+        <button (click)="deleteItem()">Delete this item</button> |
+        <button routerLink="/items/edit/{{id}}">Edit this item</button>
+    </div>
+</div>

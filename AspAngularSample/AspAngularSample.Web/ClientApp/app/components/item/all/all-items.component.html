@@ -1,0 +1,12 @@
+﻿<h2>Items page</h2>
+<div *ngIf="items">
+    <div *ngFor="let item of items">
+        <p>{{item.id}}</p>
+        <p>{{item.title}}</p>
+        <p>{{item.quantity}}</p>
+        <p>{{item.dateOfAdded}}</p>
+        <a routerLink="/items/details/{{item.id}}">Details</a>
+        <p>----------------------</p>
+    </div>
+</div>
+<p *ngIf="!items || items.length === 0">No items available.</p>
