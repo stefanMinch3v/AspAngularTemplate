@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace AspAngularSample.Web.Data.Migrations
+﻿namespace AspAngularSample.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class IdentityAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

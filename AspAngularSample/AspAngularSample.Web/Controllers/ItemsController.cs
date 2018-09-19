@@ -4,9 +4,11 @@
     using Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Services;
+    using Services.Item;
+    using Services.Item.Models;
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using ViewModels;
 
     using static WebConstants;
@@ -14,29 +16,27 @@
     public class ItemsController : BaseController
     {
         private readonly IItemService itemService;
-        private readonly IMapper mapper;
 
-        public ItemsController(IItemService itemService, IMapper mapper)
+        public ItemsController(IItemService itemService)
         {
             this.itemService = itemService;
-            this.mapper = mapper;
         }
 
         // GET api/items
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<IEnumerable<Item>> Get(bool includeIds = true)
+        public async Task<ActionResult<IEnumerable<ItemFormServiceModel>>> Get(bool includeIds = true)
         {
             try
             {
-                var items = this.itemService.GetAllItems();
+                var items = await this.itemService.All();
 
                 if (includeIds)
                 {
                     return Ok(items);
                 }
-
-                var results = this.mapper.Map<IEnumerable<Item>, IEnumerable<ItemFormViewModel>>(items);
+                
+                var results = Mapper.Map<IEnumerable<ItemFormServiceModel>, IEnumerable<ItemFormViewModel>>(items);
 
                 return Ok(results);
             }
@@ -48,15 +48,15 @@
 
         // GET api/items/5
         [HttpGet("{id}")]
-        public ActionResult<Item> Get(int id)
+        public async Task<ActionResult<ItemFormServiceModel>> Get(int id)
         {
-            var item = this.itemService.GetItem(id);
+            var item = await this.itemService.GetByIdAsync(id);
             if (item == null)
             {
                 return NotFound();
             }
-
-            var result = this.mapper.Map<Item, ItemFormViewModel>(item);
+            
+            var result = Mapper.Map<ItemFormServiceModel, ItemFormViewModel>(item);
 
             return Ok(result);
         }
@@ -64,7 +64,7 @@
         // POST api/items
         [HttpPost]
         [Authorize(Roles = AdminRole)]
-        public ActionResult Post([FromBody] ItemFormViewModel model)
+        public async Task<ActionResult> Post([FromBody] ItemFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -73,9 +73,9 @@
 
             try
             {
-                var item = this.mapper.Map<ItemFormViewModel, Item>(model);
+                var item = Mapper.Map<ItemFormViewModel, Item>(model);
 
-                this.itemService.AddItem(item);
+                await this.itemService.AddAsync(item);
 
                 return Created(string.Empty, item);
             }
@@ -88,7 +88,7 @@
         // PUT api/items/5
         [HttpPut("{id}")]
         [Authorize(Roles = AdminRole)]
-        public ActionResult Put(int id, [FromBody] ItemFormViewModel model)
+        public async Task<ActionResult> Put(int id, [FromBody] ItemFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -97,9 +97,9 @@
 
             try
             {
-                var result = this.mapper.Map<ItemFormViewModel, Item>(model);
+                var result = Mapper.Map<ItemFormViewModel, Item>(model);
 
-                this.itemService.EditItem(id, result);
+                await this.itemService.UpdateAsync(id, result);
 
                 return Ok(model);
             }
@@ -112,11 +112,11 @@
         // DELETE api/items/5
         [HttpDelete("{id}")]
         [Authorize(Roles = AdminRole)]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                this.itemService.DeleteItem(id);
+                await this.itemService.DeleteAsync(id);
 
                 return Ok($"Item was deleted");
             }

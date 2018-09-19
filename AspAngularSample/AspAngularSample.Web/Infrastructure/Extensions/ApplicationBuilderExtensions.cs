@@ -1,4 +1,4 @@
-﻿namespace AspAngularSample.Web.Infrastructure
+﻿namespace AspAngularSample.Web.Infrastructure.Extensions
 {
     using Data;
     using Data.Models;

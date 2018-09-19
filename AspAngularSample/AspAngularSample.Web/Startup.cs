@@ -1,9 +1,10 @@
 ﻿namespace AspAngularSample.Web
 {
     using AutoMapper;
+    using Common.Mapping;
     using Data;
     using Data.Models;
-    using Infrastructure;
+    using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -12,8 +13,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-    using Services;
-    using Services.Implementations;
     using System;
     using System.Text;
 
@@ -62,9 +61,10 @@
 
             services.AddRouting(routes => routes.LowercaseUrls = true);
 
-            services.AddAutoMapper(typeof(AutoMapperProfile));
+            services.AddDomainServices();
 
-            services.AddTransient<IItemService, ItemService>();
+            services.AddAutoMapper();
+            InitializeAutoMapper.AddCurrentProfile();
 
             services.AddCors(); // CORS
 

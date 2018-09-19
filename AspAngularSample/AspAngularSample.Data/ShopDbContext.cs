@@ -1,4 +1,4 @@
-﻿namespace AspAngularSample.Web.Data
+﻿namespace AspAngularSample.Data
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

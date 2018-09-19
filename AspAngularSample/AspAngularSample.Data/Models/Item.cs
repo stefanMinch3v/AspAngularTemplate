@@ -1,24 +1,26 @@
-﻿namespace AspAngularSample.Web.ViewModels
+﻿namespace AspAngularSample.Data.Models
 {
     using AutoMapper;
     using Common.Mapping;
-    using Data.Models;
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class ItemFormViewModel : IHaveCustomMapping
+    public class Item : IHaveCustomMapping
     {
+        public int Id { get; set; }
+
         [Required]
         public string Title { get; set; }
 
         [Required]
         public int Quantity { get; set; }
 
+        public DateTime DateOfAdded { get; set; }
+
         public void ConfigureMapping(Profile mapper)
         {
-            mapper.CreateMap<ItemFormViewModel, Item>()
-                 .ForMember(dest => dest.DateOfAdded, opt => opt.MapFrom(val => DateTime.UtcNow))
-                 .ReverseMap();
+            mapper.CreateMap<Item, Item>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }

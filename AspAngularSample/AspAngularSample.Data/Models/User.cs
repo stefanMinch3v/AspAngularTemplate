@@ -1,4 +1,4 @@
-﻿namespace AspAngularSample.Web.Data.Models
+﻿namespace AspAngularSample.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
 

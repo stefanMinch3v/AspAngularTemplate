@@ -1,4 +1,4 @@
-﻿namespace AspAngularSample.Web.Infrastructure
+﻿namespace AspAngularSample.Web.Infrastructure.Extensions
 {
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using System;

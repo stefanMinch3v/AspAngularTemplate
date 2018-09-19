@@ -1,7 +1,7 @@
 ﻿namespace AspAngularSample.Web.Controllers
 {
     using Data.Models;
-    using Infrastructure;
+    using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using ViewModels;
-    
+
     public class AccountController : BaseController
     {
         private readonly UserManager<User> userManager;

@@ -21,6 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspAngularSample.Common\AspAngularSample.Common.csproj" />
+    <ProjectReference Include="..\AspAngularSample.Data\AspAngularSample.Data.csproj" />
+    <ProjectReference Include="..\AspAngularSample.Services\AspAngularSample.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\item\all\all-items.component.ts" />
   </ItemGroup>
 

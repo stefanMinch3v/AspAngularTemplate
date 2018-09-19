@@ -1,41 +1,48 @@
-﻿namespace AspAngularSample.Web.Services.Implementations
+﻿namespace AspAngularSample.Services.Item.Implementations
 {
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Data;
     using Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class ItemService : IItemService
     {
         private readonly ShopDbContext dbContext;
-        private readonly IMapper mapper;
         private readonly ILogger<ShopDbContext> logger;
 
         public ItemService(
-            ShopDbContext dbContext, 
-            IMapper mapper,
+            ShopDbContext dbContext,
             ILogger<ShopDbContext> logger)
         {
             this.dbContext = dbContext;
-            this.mapper = mapper;
             this.logger = logger;
         }
 
-        public IEnumerable<Item> GetAllItems()
-            => this.dbContext.Items.ToList();
+        public async Task<IEnumerable<ItemFormServiceModel>> All()
+            => await this.dbContext.Items
+                .OrderByDescending(i => i.DateOfAdded)
+                .ProjectTo<ItemFormServiceModel>()
+                .ToListAsync();
 
-        public Item GetItem(int id)
-            => this.dbContext.Items.FirstOrDefault(i => i.Id == id);
+        public async Task<ItemFormServiceModel> GetByIdAsync(int id)
+            => await this.dbContext.Items
+                .Where(i => i.Id == id)
+                .ProjectTo<ItemFormServiceModel>()
+                .FirstOrDefaultAsync();
 
-        public void AddItem(Item item)
+        public async Task AddAsync(Item item)
         {
             try
             {
                 this.dbContext.Items.Add(item);
-                this.dbContext.SaveChanges();
+                await this.dbContext.SaveChangesAsync();
 
                 this.logger.LogInformation(">>>>>>>>>>>>>New item added.");
             }
@@ -46,7 +53,7 @@
 
         }
 
-        public void EditItem(int id, Item item)
+        public async Task UpdateAsync(int id, Item item)
         {
             var existingItem = this.dbContext.Items.Find(id);
             if (existingItem == null)
@@ -54,15 +61,15 @@
                 throw new InvalidOperationException("Item does not exist.");
             }
 
-            var result = this.mapper.Map(item, existingItem);
+            var result = Mapper.Map(item, existingItem);
 
             this.dbContext.Items.Update(result);
-            this.dbContext.SaveChanges();
+            await this.dbContext.SaveChangesAsync();
 
-            this.logger.LogInformation($">>>>>>>>>>>Item {item.Title} was updated.");
+            this.logger.LogInformation($">>>>>>>>>>>Item {existingItem.Title} was updated.");
         }
 
-        public void DeleteItem(int id)
+        public async Task DeleteAsync(int id)
         {
             var existingItem = this.dbContext.Items.Find(id);
             if (existingItem == null)
@@ -71,7 +78,7 @@
             }
 
             this.dbContext.Items.Remove(existingItem);
-            this.dbContext.SaveChanges();
+            await this.dbContext.SaveChangesAsync();
 
             this.logger.LogInformation($">>>>>>>>>>>>>Item {existingItem.Title} was deleted.");
         }

@@ -1,16 +1,15 @@
-﻿namespace AspAngularSample.Web.Data.Models
+﻿namespace AspAngularSample.Services.Item.Models
 {
+    using Common.Mapping;
+    using Data.Models;
     using System;
-    using System.ComponentModel.DataAnnotations;
 
-    public class Item
+    public class ItemFormServiceModel : IMapFrom<Item>
     {
         public int Id { get; set; }
 
-        [Required]
         public string Title { get; set; }
 
-        [Required]
         public int Quantity { get; set; }
 
         public DateTime DateOfAdded { get; set; }
