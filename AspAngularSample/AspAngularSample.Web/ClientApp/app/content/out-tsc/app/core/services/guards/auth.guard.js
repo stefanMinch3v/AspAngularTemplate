@@ -19,9 +19,11 @@ var AuthGuard = /** @class */ (function () {
         return this.check();
     };
     AuthGuard.prototype.check = function () {
-        if (this.authService.isUserAuthenticated()) {
+        var expirationTime = new Date(this.authService.getExpirationTime());
+        if (this.authService.isUserAuthenticated() && expirationTime > new Date) {
             return true;
         }
+        this.authService.deauthenticateUser();
         this.router.navigate(['/account/login']);
         return false;
     };

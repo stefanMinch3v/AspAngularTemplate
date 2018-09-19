@@ -5,6 +5,7 @@ export class AuthService {
     private static readonly USER_KEY = 'user';
     private static readonly TOKEN_KEY = 'token';
     private static readonly ROLES_KEY = 'roles';
+    private static readonly EXPIRE_KEY = 'expiration';
 
     public saveUser(user) {
         window.localStorage.setItem(AuthService.USER_KEY, user);
@@ -26,6 +27,7 @@ export class AuthService {
         this.removeUser();
         this.removeToken();
         this.removeRoles();
+        this.removeExpirationTime();
     }
 
     public getToken() {
@@ -38,6 +40,18 @@ export class AuthService {
 
     public getRoles() {
         return window.localStorage.getItem(AuthService.ROLES_KEY);
+    }
+
+    public saveExpirationTime(expiration) {
+        window.localStorage.setItem(AuthService.EXPIRE_KEY, expiration);
+    }
+
+    public getExpirationTime() {
+        return window.localStorage.getItem(AuthService.EXPIRE_KEY);
+    }
+
+    private removeExpirationTime() {
+        window.localStorage.removeItem(AuthService.EXPIRE_KEY);
     }
 
     private removeRoles() {

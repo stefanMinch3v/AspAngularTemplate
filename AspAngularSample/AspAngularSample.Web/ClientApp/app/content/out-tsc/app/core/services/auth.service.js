@@ -25,6 +25,7 @@ var AuthService = /** @class */ (function () {
         this.removeUser();
         this.removeToken();
         this.removeRoles();
+        this.removeExpirationTime();
     };
     AuthService.prototype.getToken = function () {
         return window.localStorage.getItem(AuthService_1.TOKEN_KEY);
@@ -34,6 +35,15 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.getRoles = function () {
         return window.localStorage.getItem(AuthService_1.ROLES_KEY);
+    };
+    AuthService.prototype.saveExpirationTime = function (expiration) {
+        window.localStorage.setItem(AuthService_1.EXPIRE_KEY, expiration);
+    };
+    AuthService.prototype.getExpirationTime = function () {
+        return window.localStorage.getItem(AuthService_1.EXPIRE_KEY);
+    };
+    AuthService.prototype.removeExpirationTime = function () {
+        window.localStorage.removeItem(AuthService_1.EXPIRE_KEY);
     };
     AuthService.prototype.removeRoles = function () {
         window.localStorage.removeItem(AuthService_1.ROLES_KEY);
@@ -47,6 +57,7 @@ var AuthService = /** @class */ (function () {
     AuthService.USER_KEY = 'user';
     AuthService.TOKEN_KEY = 'token';
     AuthService.ROLES_KEY = 'roles';
+    AuthService.EXPIRE_KEY = 'expiration';
     AuthService = AuthService_1 = __decorate([
         Injectable()
     ], AuthService);

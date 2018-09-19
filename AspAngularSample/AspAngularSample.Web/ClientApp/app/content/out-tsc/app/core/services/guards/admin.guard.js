@@ -21,7 +21,9 @@ var AdminGuard = /** @class */ (function () {
         return this.check();
     };
     AdminGuard.prototype.check = function () {
-        if (!this.authService.isUserAuthenticated()) {
+        var expirationTime = new Date(this.authService.getExpirationTime());
+        if (!this.authService.isUserAuthenticated() || expirationTime < new Date) {
+            this.authService.deauthenticateUser();
             this.router.navigate(['/account/login']);
             return;
         }

@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
                 this.authService.authenticateUser(res['token']);
                 this.authService.saveUser(this.user.username);
                 this.authService.saveRoles(res['roles']);
+                this.authService.saveExpirationTime(res['expiration']);
                 
                 this.router.navigate(['/']);
             },

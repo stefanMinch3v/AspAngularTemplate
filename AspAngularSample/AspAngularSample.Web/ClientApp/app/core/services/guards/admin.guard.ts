@@ -23,7 +23,9 @@ export class AdminGuard implements CanActivate {
     }
 
     check(): boolean {
-        if (!this.authService.isUserAuthenticated()) {
+        const expirationTime = new Date(this.authService.getExpirationTime());
+        if (!this.authService.isUserAuthenticated() || expirationTime < new Date) {
+            this.authService.deauthenticateUser();
             this.router.navigate(['/account/login']);
             return;
         }

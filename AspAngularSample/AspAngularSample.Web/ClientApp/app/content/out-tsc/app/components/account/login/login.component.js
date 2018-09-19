@@ -28,6 +28,7 @@ var LoginComponent = /** @class */ (function () {
             _this.authService.authenticateUser(res['token']);
             _this.authService.saveUser(_this.user.username);
             _this.authService.saveRoles(res['roles']);
+            _this.authService.saveExpirationTime(res['expiration']);
             _this.router.navigate(['/']);
         }, function (error) { return console.log(error.error); }); // handle error
     };
