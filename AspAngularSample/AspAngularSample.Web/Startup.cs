@@ -63,10 +63,12 @@
 
             services.AddDomainServices();
 
+            // automapper
             services.AddAutoMapper();
             InitializeAutoMapper.AddCurrentProfile();
 
-            services.AddCors(); // CORS
+            // CORS policy
+            services.AddCors();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -92,6 +94,7 @@
 
             app.UseHttpsRedirection();
 
+            // global CORS 
             app.UseCors(options =>
             {
                 options
@@ -99,7 +102,7 @@
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
-            }); // global CORS 
+            });
 
             app.UseMvc(routes =>
             {
