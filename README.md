@@ -23,7 +23,7 @@
 
 ## Login
 ### Login with username and password
-> * **Default administartor**
+> * **Default administrator**
 >   * Username: admin
 >   * Password: admin12
 > * **Default user**
