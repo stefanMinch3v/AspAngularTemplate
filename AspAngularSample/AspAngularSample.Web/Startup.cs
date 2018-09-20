@@ -63,10 +63,6 @@
 
             services.AddDomainServices();
 
-            // automapper
-            services.AddAutoMapper();
-            InitializeAutoMapper.AddCurrentProfile();
-
             // CORS policy
             services.AddCors();
 
@@ -76,6 +72,9 @@
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // automapper
+            InitializeAutoMapper.AddCurrentProfile();
+
             app.UseDatabaseMigration();
 
             if (env.IsDevelopment())
