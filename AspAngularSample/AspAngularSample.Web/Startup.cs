@@ -68,6 +68,11 @@
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSpaStaticFiles(config =>
+            {
+                config.RootPath = "ClientApp/app/content/dist";
+            });
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
