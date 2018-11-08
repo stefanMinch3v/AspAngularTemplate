@@ -15,8 +15,8 @@ import { ItemFormInputModel } from "../../models/item/item-form.input.model";
 import { environment } from '../../../../environments/environment';
 
 
-const dbUrl = environment.localhost.url;
-const itemsUrl = `${dbUrl}/items`;
+const localhostUrl = environment.localhost.url;
+const itemsUrl = `${localhostUrl}/items`;
 
 @Injectable({
     providedIn: 'root'
@@ -35,52 +35,30 @@ export class ItemService {
 
     public getSingle(id: number): Observable<ItemDetailsViewModel> {
         // add validations
-        const url = `${itemsUrl}/${id}`;
-        const headers = this.prepareBearerTokenHeaders(false);
 
-        return this.http.get(url, { headers })
+        const url = `${itemsUrl}/${id}`;
+        return this.http.get(url)
             .pipe(map((res: Response) => Object.assign(res)));
     }
 
     public remove(id: number): Observable<object> {
         // add validations
-        const url = `${itemsUrl}/${id}`;
-        const headers = this.prepareBearerTokenHeaders(false);
 
-        return this.http.delete(url, { headers })
+        const url = `${itemsUrl}/${id}`;
+        return this.http.delete(url)
             .pipe(map((res: Response) => Object.assign(res)));
     }
 
     public edit(id: number, editItemModel: ItemFormInputModel): Observable<object> {
         // add validations
-        const url = `${itemsUrl}/${id}`;
-        const headers = this.prepareBearerTokenHeaders(false);
 
-        return this.http.put(url, editItemModel, { headers })
+        const url = `${itemsUrl}/${id}`;
+        return this.http.put(url, editItemModel)
             .pipe(map((res: Response) => Object.assign(res)));
     }
 
     public create(createItemModel: ItemFormInputModel): Observable<object> {
-        // add validations
-        const headers = this.prepareBearerTokenHeaders(true);
-
-        return this.http.post(itemsUrl, createItemModel, { headers })
+        return this.http.post(itemsUrl, createItemModel)
             .pipe(map((res: Response) => Object.assign(res)));
-    }
-
-    private prepareBearerTokenHeaders(isPostReq) {
-        const token = this.authService.getToken();
-
-        const headers = new HttpHeaders({
-            'Authorization': `Bearer ${token}`
-        });
-
-        if (isPostReq) {
-            headers.set('Content-Type', 'application/json');
-        } else {
-            headers.set('Content-Type', 'application/x-www-form-urlencoded');
-        }
-
-        return headers;
     }
 };

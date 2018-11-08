@@ -13,8 +13,8 @@ import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-var dbUrl = environment.localhost.url;
-var itemsUrl = dbUrl + "/items";
+var localhostUrl = environment.localhost.url;
+var itemsUrl = localhostUrl + "/items";
 var ItemService = /** @class */ (function () {
     function ItemService(http, authService, router) {
         this.http = http;
