@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ItemService } from '../../../core/services/item/item.service';
+import { ItemService } from '../../../core/services/data/item/item.service';
 import { RoleService } from '../../../core/services/role.service';
 
 import { ItemDetailsViewModel } from '../../../core/models/item/item-details.view.model';

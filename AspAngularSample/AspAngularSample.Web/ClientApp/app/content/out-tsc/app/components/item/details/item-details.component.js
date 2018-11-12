@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemService } from '../../../core/services/item/item.service';
+import { ItemService } from '../../../core/services/data/item/item.service';
 import { RoleService } from '../../../core/services/role.service';
 var ItemDetailsComponent = /** @class */ (function () {
     function ItemDetailsComponent(itemService, route, router, roleService) {

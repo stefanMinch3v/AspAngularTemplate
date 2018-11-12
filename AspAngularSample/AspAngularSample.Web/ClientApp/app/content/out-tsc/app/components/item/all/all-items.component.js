@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { ItemService } from '../../../core/services/item/item.service';
+import { ItemService } from '../../../core/services/data/item/item.service';
 var AllItemsComponent = /** @class */ (function () {
     function AllItemsComponent(itemService) {
         this.itemService = itemService;

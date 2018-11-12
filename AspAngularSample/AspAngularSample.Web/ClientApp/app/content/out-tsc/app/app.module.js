@@ -14,7 +14,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './core/services/guards/auth.guard';
 import { AdminGuard } from './core/services/guards/admin.guard';
-import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { TokenInterceptor } from './core/services/interceptors/token.interceptor';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }

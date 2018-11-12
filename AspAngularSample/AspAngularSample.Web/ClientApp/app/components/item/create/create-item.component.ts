@@ -2,7 +2,7 @@
 
 import { Observable } from 'rxjs';
 
-import { ItemService } from '../../../core/services/item/item.service';
+import { ItemService } from '../../../core/services/data/item/item.service';
 
 import { ItemFormInputModel } from '../../../core/models/item/item-form.input.model';
 

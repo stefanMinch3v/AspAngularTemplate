@@ -1,18 +1,15 @@
 ﻿import { Injectable } from "@angular/core";
 import { Response } from "@angular/http";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from "@angular/router";
-
-import { AuthService } from "../auth.service";
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AllItemsViewModel } from "../../models/item/all-items.view.model";
-import { ItemDetailsViewModel } from "../../models/item/item-details.view.model";
-import { ItemFormInputModel } from "../../models/item/item-form.input.model";
+import { AllItemsViewModel } from "../../../models/item/all-items.view.model";
+import { ItemDetailsViewModel } from "../../../models/item/item-details.view.model";
+import { ItemFormInputModel } from "../../../models/item/item-form.input.model";
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 
 const localhostUrl = environment.localhost.url;
@@ -22,11 +19,7 @@ const itemsUrl = `${localhostUrl}/items`;
     providedIn: 'root'
 })
 export class ItemService {
-    constructor(
-        private http: HttpClient,
-        private authService: AuthService,
-        private router: Router
-    ) { }
+    constructor(private http: HttpClient) { }
 
     public getAll(): Observable<AllItemsViewModel[]> {
         return this.http.get(itemsUrl)

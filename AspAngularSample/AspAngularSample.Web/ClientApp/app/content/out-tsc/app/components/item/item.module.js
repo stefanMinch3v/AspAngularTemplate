@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemRoutesModule } from './item.routes.module';
-import { ItemService } from '../../core/services/item/item.service';
+import { ItemService } from '../../core/services/data/item/item.service';
 import { AuthService } from '../../core/services/auth.service';
 import { itemsComponents } from '.';
 var ItemModule = /** @class */ (function () {

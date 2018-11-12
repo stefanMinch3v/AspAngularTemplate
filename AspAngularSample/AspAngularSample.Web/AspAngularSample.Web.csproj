@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\item\item.component.ts" />
-    <None Remove="ClientApp\app\core\interceptors\token.interceptor.ts" />
+    <None Remove="ClientApp\app\core\services\interceptors\token.interceptor.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\item\all\all-items.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\core\interceptors\token.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\app\core\services\interceptors\token.interceptor.ts" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './core/services/guards/auth.guard';
 import { AdminGuard } from './core/services/guards/admin.guard';
 
-import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { TokenInterceptor } from './core/services/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
