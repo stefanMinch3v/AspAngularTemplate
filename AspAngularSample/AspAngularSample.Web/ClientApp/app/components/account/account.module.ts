@@ -1,7 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AccountRoutesModule } from './account.routes.module';
 
@@ -11,7 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { accountComponents } from '.';
 
 @NgModule({
-    imports: [CommonModule, AccountRoutesModule, FormsModule, HttpClientModule],
+    imports: [CommonModule, AccountRoutesModule, FormsModule],
     declarations: [...accountComponents],
     providers: [AccountService, AuthService]
 })
