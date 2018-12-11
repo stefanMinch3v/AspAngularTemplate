@@ -1,7 +1,7 @@
 # AspAngularTemplate
 
 ## Table:
-*   RESTful API Backend using ASP.NET Core 2.1 Web API and MVC for roles.
+*   RESTful API Backend using ASP.NET Core 2.2 Web API and MVC for roles.
 *   Angular 6.
 *   Database - Entity Framework Core.
 *   Jwt token authorization using Bearer schema.
