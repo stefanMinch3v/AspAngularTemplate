@@ -33,16 +33,16 @@
 
                 if (includeIds)
                 {
-                    return Ok(items);
+                    return this.Ok(items);
                 }
                 
                 var results = Mapper.Map<IEnumerable<ItemFormServiceModel>, IEnumerable<ItemFormViewModel>>(items);
 
-                return Ok(results);
+                return this.Ok(results);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return this.BadRequest(ex.Message);
             }
         }
 
@@ -53,12 +53,12 @@
             var item = await this.itemService.GetByIdAsync(id);
             if (item == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
             
             var result = Mapper.Map<ItemFormServiceModel, ItemFormViewModel>(item);
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         // POST api/items
@@ -68,7 +68,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
             try
@@ -77,11 +77,11 @@
 
                 await this.itemService.AddAsync(item);
 
-                return Created(string.Empty, item);
+                return this.Created(string.Empty, item);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return this.BadRequest(ex.Message);
             } 
         }
 
@@ -92,7 +92,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
             try
@@ -101,11 +101,11 @@
 
                 await this.itemService.UpdateAsync(id, result);
 
-                return Ok(model);
+                return this.Ok(model);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return this.BadRequest(ex.Message);
             }
         }
 
@@ -118,11 +118,11 @@
             {
                 await this.itemService.DeleteAsync(id);
 
-                return Ok($"Item was deleted");
+                return this.Ok($"Item was deleted");
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return this.BadRequest(ex.Message);
             }   
         }
     }

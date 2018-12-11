@@ -66,7 +66,7 @@
         {
             if (!this.ModelState.IsValid || this.ModelState == null)
             {
-                return BadRequest("Invalid credentials.");
+                return this.BadRequest("Invalid credentials.");
             }
 
             var result = await this.signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
@@ -74,20 +74,20 @@
             {
                 this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
 
-                return BadRequest(this.ModelState.GetFirstError());
+                return this.BadRequest(this.ModelState.GetFirstError());
             }
 
-            var user = await userManager.FindByNameAsync(model.Username);
+            var user = await this.userManager.FindByNameAsync(model.Username);
             if (user == null)
             {
-                return BadRequest("Unexisting user.");
+                return this.BadRequest("Unexisting user.");
             }
 
             this.logger.LogInformation("User logged in.");
 
             var securityToken = this.BuildToken(user);
 
-            return Ok(securityToken);
+            return this.Ok(securityToken);
         }
 
         private object BuildToken(User model)
@@ -105,7 +105,8 @@
             {
                 foreach (var roleName in userRoles)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, roleName));// adds role to the security token and later been recognized in the api
+                    // adds role to the security token and later been recognized in the api
+                    claims.Add(new Claim(ClaimTypes.Role, roleName));
                 }
             }
 

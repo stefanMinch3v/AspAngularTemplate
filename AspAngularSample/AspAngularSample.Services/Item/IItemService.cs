@@ -1,7 +1,7 @@
 ﻿namespace AspAngularSample.Services.Item
 {
-    using Models;
     using Data.Models;
+    using Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 

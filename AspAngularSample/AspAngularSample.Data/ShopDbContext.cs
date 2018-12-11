@@ -30,6 +30,5 @@
                 new Item { Id = 2, Title = "Test another item", Quantity = 35, DateOfAdded = DateTime.UtcNow.AddDays(5) },
             };
         }
-
     }
 }

@@ -3,7 +3,7 @@
     using AutoMapper;
 
     /// <summary>
-    /// custom configuration - describes the binding configs for the specific properties
+    /// custom configuration - describes the binding configurations for the specific properties
     /// </summary>
     public interface IHaveCustomMapping
     {
