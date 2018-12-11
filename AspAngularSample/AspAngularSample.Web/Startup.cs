@@ -1,6 +1,5 @@
 ﻿namespace AspAngularSample.Web
 {
-    using AutoMapper;
     using Common.Mapping;
     using Data;
     using Data.Models;
@@ -66,20 +65,20 @@
             // CORS policy
             services.AddCors();
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddSpaStaticFiles(config =>
             {
                 config.RootPath = "ClientApp/app/content/dist";
             });
+
+            // automapper
+            InitializeAutoMapper.AddCurrentProfile();
+
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);           
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // automapper
-            InitializeAutoMapper.AddCurrentProfile();
-
             app.UseDatabaseMigration();
 
             if (env.IsDevelopment())
