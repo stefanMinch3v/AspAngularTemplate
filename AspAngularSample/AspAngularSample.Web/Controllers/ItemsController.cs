@@ -1,4 +1,6 @@
-﻿namespace AspAngularSample.Web.Controllers
+﻿using Microsoft.AspNetCore.Http;
+
+namespace AspAngularSample.Web.Controllers
 {
     using AutoMapper;
     using Data.Models;
@@ -24,6 +26,9 @@
 
         // GET api/items
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ItemFormServiceModel>>> Get(bool includeIds = true)
         {
@@ -48,6 +53,9 @@
 
         // GET api/items/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<ItemFormServiceModel>> Get(int id)
         {
             var item = await this.itemService.GetByIdAsync(id);
@@ -63,21 +71,19 @@
 
         // POST api/items
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         [Authorize(Roles = AdminRole)]
         public async Task<ActionResult> Post([FromBody] ItemFormViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return this.BadRequest();
-            }
-
             try
             {
                 var item = Mapper.Map<ItemFormViewModel, Item>(model);
 
                 await this.itemService.AddAsync(item);
 
-                return this.Created(string.Empty, item);
+                return this.CreatedAtAction(nameof(Get), new { id = item.Id }, item);
             }
             catch (Exception ex)
             {
@@ -87,14 +93,12 @@
 
         // PUT api/items/5
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         [Authorize(Roles = AdminRole)]
         public async Task<ActionResult> Put(int id, [FromBody] ItemFormViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return this.BadRequest();
-            }
-
             try
             {
                 var result = Mapper.Map<ItemFormViewModel, Item>(model);
@@ -111,6 +115,9 @@
 
         // DELETE api/items/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         [Authorize(Roles = AdminRole)]
         public async Task<ActionResult> Delete(int id)
         {
