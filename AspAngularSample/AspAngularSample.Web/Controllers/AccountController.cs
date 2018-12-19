@@ -37,15 +37,10 @@
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [Route("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
-            if (model == null || !this.ModelState.IsValid)
-            {
-                return this.BadRequest(this.ModelState.GetFirstError());
-            }
-
             var user = new User { Email = model.Email, UserName = model.Username };
             var result = await this.userManager.CreateAsync(user, model.Password);
 
@@ -60,15 +55,10 @@
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [Route("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
-            if (!this.ModelState.IsValid || this.ModelState == null)
-            {
-                return this.BadRequest("Invalid credentials.");
-            }
-
             var result = await this.signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
             if (!result.Succeeded)
             {
