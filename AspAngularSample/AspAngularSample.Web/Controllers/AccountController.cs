@@ -36,8 +36,8 @@
             this.logger = logger;
         }
 
-        [AllowAnonymous]
         [HttpPost]
+        [AllowAnonymous]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
