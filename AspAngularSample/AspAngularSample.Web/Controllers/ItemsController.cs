@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace AspAngularSample.Web.Controllers
+﻿namespace AspAngularSample.Web.Controllers
 {
     using AutoMapper;
     using Data.Models;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Services.Item;
     using Services.Item.Models;
